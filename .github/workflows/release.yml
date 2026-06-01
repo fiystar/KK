@@ -1,0 +1,38 @@
+name: Create Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version (X.Y.Z)'
+        required: true
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Validate version
+      run: |
+        if ! [[ "${{ inputs.version }}" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+          echo "❌ Invalid format"
+          exit 1
+        fi
+    
+    - name: Update version
+      run: |
+        sed -i 's/version="[^"]*"/version="${{ inputs.version }}"/g' setup.py
+        sed -i 's/version = "[^"]*"/version = "${{ inputs.version }}"/g' pyproject.toml
+    
+    - name: Commit and tag
+      run: |
+        git config user.name "GitHub Actions"
+        git config user.email "actions@github.com"
+        git add setup.py pyproject.toml
+        git commit -m "chore: bump to ${{ inputs.version }}"
+        git tag v${{ inputs.version }}
+        git push origin main
+        git push origin v${{ inputs.version }}
+        echo "✅ Release ${{ inputs.version }} created!"
