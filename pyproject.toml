@@ -1,0 +1,52 @@
+[build-system]
+requires = ["setuptools>=45", "wheel", "setuptools_scm[toml]>=6.2"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "kk-trading"
+version = "1.0.0"
+description = "Professional K-line recognition and analysis tool using Binance API"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "MIT"}
+authors = [
+    {name = "fiystar", email = "67568400+fiystar@users.noreply.github.com"}
+]
+maintainers = [
+    {name = "fiystar", email = "67568400+fiystar@users.noreply.github.com"}
+]
+keywords = [
+    "kline",
+    "candlestick",
+    "trading",
+    "binance",
+    "analysis",
+    "technical-indicators",
+    "pattern-recognition"
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Financial and Insurance Industry",
+    "Topic :: Office/Business :: Financial :: Investment",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+]
+
+[project.urls]
+Homepage = "https://github.com/fiystar/KK"
+Documentation = "https://github.com/fiystar/KK#readme"
+Repository = "https://github.com/fiystar/KK"
+Issues = "https://github.com/fiystar/KK/issues"
+
+[project.scripts]
+kk-analyze = "main:main"
+
+[tool.setuptools]
+packages = ["kk-trading"]
